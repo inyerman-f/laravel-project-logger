@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers;
-use App\Models\Project;
+use App\Http\Controllers\Controller;
+use App\Models\Task;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Project;
+use App\Http\Controllers\Api\AuthController;
 
 class ProjectController extends Controller
 {
@@ -14,9 +19,6 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function test(){
-        return response()->json('derd',200);
-    }
     public function index()
     {
         $projects = auth()->user()->projects;
@@ -30,16 +32,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,6 +39,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'project_name' => 'required',
             'project_description' => 'required'
@@ -55,9 +48,9 @@ class ProjectController extends Controller
         $project = new Project();
         $project->project_name = $request->project_name;
         $project->project_description = $request->project_description;
-        //$project->user_id = Auth::user()->id;
+        $project->user_id = auth()->user()->getAuthIdentifier();
 
-        if (auth()->user()->projects()->save($project))
+        if ($project->save())
             return response()->json([
                 'success' => true,
                 'data' => $project->toArray()
@@ -67,6 +60,8 @@ class ProjectController extends Controller
                 'success' => false,
                 'message' => 'Project not added'
             ], 444);
+
+
     }
 
     /**
@@ -77,7 +72,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return response()->json($project);
     }
 
     /**
@@ -100,7 +95,29 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        //$post = auth()->user()->posts()->find($id);
+
+        if (!$project) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found'
+            ], 400);
+        }
+
+        $updated = $project->fill($request->all())->save();
+
+        if ($updated)
+            return response()->json([
+                'success' => true,
+                'message'=>$project
+            ]);
+        else
+            return response()->json([
+                'success' => false,
+                'message' => 'Post can not be updated'
+            ], 500);
+        //return response()->json($request );
+
     }
 
     /**
@@ -109,8 +126,19 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function obliterate(Project $project)
     {
-        //
+        if ($project->delete()) {
+            return response()->json([
+                'success' => true,
+                'mesage' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post can not be deleted'
+            ], 500);
+        }
     }
+
 }
