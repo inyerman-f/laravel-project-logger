@@ -22,6 +22,11 @@ Route::post('derp',[ProjectController::class, 'test']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('projects',[ProjectController::class, 'index']);
-    Route::post('add_project',[ProjectController::class, 'store']);
+
+    Route::get('projects',[ProjectController::class, 'index']);
+    Route::post('projects/add',[ProjectController::class, 'store']);
+    Route::get('projects/{project}',[ProjectController::class, 'show']);
+    Route::post('projects/{project}/edit',[ProjectController::class, 'update']);
+    Route::post('projects/{project}/delete', [ProjectController::class, 'obliterate']);
+
 });
