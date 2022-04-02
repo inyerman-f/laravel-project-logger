@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Project;
+use App\Models\Task;
 
 class TaskController extends Controller
 {
@@ -12,9 +14,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+        $tasks = $project->tasks;
+        return response($tasks,200);
+
     }
 
     /**
@@ -22,9 +26,9 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -33,9 +37,29 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Project $project)
     {
-        //
+
+
+        $this->validate($request, [
+            'task_name' => 'required',
+            'task_description' => 'required'
+        ]);
+        $task = new Task();
+        $task->task_name = $request->task_name;
+        $task->task_description = $request->task_description;
+        $task->project_id = $project['id'];
+
+        if ($task->save())
+            return response()->json([
+                'success' => true,
+                'data' => $task->toArray()
+            ]);
+        else
+            return response()->json([
+                'success' => false,
+                'message' => 'Project not added'
+            ], 444);
     }
 
     /**
@@ -78,8 +102,20 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function obliterate( Task $task)
     {
-        //
+        //return $task;
+
+        if ($task->delete()) {
+            return response()->json([
+                'success' => true,
+                'mesage' => $task
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Task can not be deleted'
+            ], 500);
+        }
     }
 }
