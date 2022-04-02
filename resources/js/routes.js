@@ -8,6 +8,7 @@ import Register from './components/register.vue';
 import Dashboard from './components/dashboard.vue';
 import Projects from "./components/projects";
 import AddProject from "./components/AddProject";
+import Tasks from "./components/tasks";
 
 
 const routes = [
@@ -22,7 +23,7 @@ const routes = [
         name: "Register"
     },
     {
-        path: '/',
+        path: '/dashboard',
         component: Dashboard,
         name: "Dashboard",
         meta: {
@@ -33,6 +34,14 @@ const routes = [
         path: '/projects',
         component: Projects,
         name: "Projects",
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/projects/:id/tasks',
+        component: Tasks,
+        name: "Tasks",
         meta: {
             requiresAuth: true
         }
