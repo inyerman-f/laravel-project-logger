@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard.vue';
 import Projects from "./components/projects";
 import AddProject from "./components/AddProject";
 import Tasks from "./components/tasks";
+import EditProject from "./components/EditProject";
 
 
 const routes = [
@@ -39,6 +40,14 @@ const routes = [
         }
     },
     {
+        path: '/projects/add',
+        component: AddProject ,
+        name: "Add Project",
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
         path: '/projects/:id/tasks',
         component: Tasks,
         name: "Tasks",
@@ -47,9 +56,9 @@ const routes = [
         }
     },
     {
-        path: '/AddProject',
-        component: AddProject ,
-        name: "Add Project",
+        path: '/projects/:id/edit',
+        component: EditProject ,
+        name: "Edit Project",
         meta: {
             requiresAuth: true
         }

@@ -1,5 +1,4 @@
 <template>
-
         <div class="container">
             <h1>Add a new project.</h1>
             <div>
@@ -10,17 +9,11 @@
                 <label for="project_description">Project Description</label>
                 <input type="text" v-model="projecto.project_description">
             </div>
-
             <button @click="addProject()">Add Project</button>
         </div>
-
 </template>
-
 <script>
-
-
 export default {
-
     data() {
         return {
             projecto: {
@@ -29,7 +22,6 @@ export default {
             }
         };
     },
-
     methods: {
         addProject() {
             console.log(this.user);

@@ -20,7 +20,7 @@ import Auth from '../Auth.js';
 
 
 export default {
-
+    name:'Login',
     data() {
         return {
             user: {
@@ -41,11 +41,19 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.$router.go();
+                    this.$router.push('/login');
                 });
-            var link = document.getElementById('login_nav');
-            //link.style.display = 'none'; //or
-            link.style.visibility = 'hidden';
+/*
+            let login_nav = document.getElementById('login_nav');
+            let register_nav = document.getElementById('register_nav');
+            let projects_nav = document.getElementById('projects_nav');
+            let dashboard_nav = document.getElementById('dashboard_nav');
+            let logout_nav = document.getElementById('logout_nav_link');
+            logout_nav.style.visibility= 'show';
+            login_nav.style.visibility = 'hidden';
+            register_nav.style.visibility = 'hidden';
+            projects_nav.style.visibility = 'show';
+            dashboard_nav.style.visibility = 'show';*/
         }
     }
 }
