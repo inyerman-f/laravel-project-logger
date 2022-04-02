@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProjectController;
-
+use App\Http\Controllers\Api\TaskController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,7 +18,8 @@ use App\Http\Controllers\Api\ProjectController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::post('derp',[ProjectController::class, 'test']);
+
+
 
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
@@ -28,5 +29,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('projects/{project}',[ProjectController::class, 'show']);
     Route::post('projects/{project}/edit',[ProjectController::class, 'update']);
     Route::post('projects/{project}/delete', [ProjectController::class, 'obliterate']);
+
+    Route::post('projects/{project}/tasks',[TaskController::class, 'index']);
+    Route::post('projects/{project}/tasks/add',[TaskController::class, 'store']);
+    Route::post('projects/{project}/tasks/{task}/edit',[TaskController::class, 'update']);
+    Route::post('projects/{project}/tasks/{task}/delete',[TaskController::class, 'obliterate']);
+    Route::post('tasks/{task}/delete',[TaskController::class, 'obliterate']);
 
 });
