@@ -14,11 +14,24 @@
         <h4>All Tasks</h4>
         <div class="list-group" v-if="tasks">
             <div v-if='tasks.length === 0'>There are no tasks yet!</div>
-
-            <div class="list-group-item" v-for="(item, index) in tasks">
-                <span width="45vw" >{{ item.task_name }}</span><span width="45vw">{{item.task_description}} {{item.id}}</span>
-                <button @click="deleteTask(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button>
-            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Task Id</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Task Description</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="projects_table" v-for="(item, index) in tasks">
+                <tr>
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.task_name}}</td>
+                    <td>{{item.task_description}}</td>
+                    <td><button @click="deleteTask(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
