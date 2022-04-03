@@ -14,6 +14,10 @@ import EditProject from "./components/EditProject";
 
 const routes = [
     {
+        path: '/',
+        redirect: '/login'
+    },
+    {
         path: '/login',
         component: Login,
         name: "Login"
