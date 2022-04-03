@@ -1,29 +1,44 @@
 <template>
-    <div class="container">
-        <div class='row'>
+    <div class="container" id="projects_content">
+        <section>
             <h1>Project List for {{user.name}}</h1>
             <h4>Add a Project</h4>
             <form @submit.prevent="addNewProject()">
                 <div class="input-group">
                     <input v-model="project.project_name" type="text" name="project_name" class="form-control" autofocus>
                     <input v-model="project.project_description" type="text" name="project_description" class="form-control" autofocus>
-                    <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary">New Project</button>
-                </span>
                 </div>
             </form>
+        </section>
+        <section>
             <h4>All Projects</h4>
             <div class="list-group" v-if="projects">
                 <div v-if='projects.length === 0'>There are no projects yet!</div>
-
-                <div class="list-group-item" v-for="(item, index) in projects">
-                    <span width="45vw" >{{ item.project_name }}</span><span width="45vw">{{item.project_description}} {{item.id}}</span>
-                    <button @click="deleteProject(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button>
-                    <button @click="editProject(item.id)" class="btn btn-danger btn-xs pull-right">Edit</button>
-                    <button v-on:click="goToTasks(item.id)" class="btn btn-danger btn-xs pull-right">See Tasks</button>
-                </div>
             </div>
-        </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Project Id</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Project Description</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">See Tasks</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="projects_table" v-for="(item, index) in projects">
+                <tr>
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.project_name}}</td>
+                    <td>{{item.project_description}}</td>
+                    <td><button @click="editProject(item.id)" class="btn btn-primary btn-xs pull-right">Edit</button></td>
+                    <td><button v-on:click="goToTasks(item.id)" class="btn btn-primary btn-xs pull-right">See Tasks</button></td>
+                    <td><button @click="deleteProject(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
 </template>
 <script>
@@ -42,7 +57,6 @@ export default {
     },
     created() {
         this.fetchProjectsList();
-        // console.log(this.auth.user);
     },
     methods: {
         goToTasks(project_id){
@@ -56,25 +70,31 @@ export default {
                     this.loading = false;
                 })
                 .catch((err) => console.error(err));
-            //this.list = '{derp}';
         },
         addNewProject(){
-            this.$router.push('/projects/add');
+            console.log(this.user);
+            this.axios.post('/api/projects/add', this.project)
+                .then(({data}) => {
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.fetchProjectsList();
         },
         editProject(project_id){
             this.$router.push('/projects/'+project_id+'/edit');
         },
         deleteProject(id) {
-
             axios.post('/api/projects/' + id + '/delete')
                 .then((res) => {
-
                 })
-                .catch((err) => console.error(err));
+                .catch((err) =>
+                {
+                    console.error(err);
+                    alert('You must delete the tasks associated to this project, prior to removing the project.');
+                });
             this.fetchProjectsList()
         },
-
-
     }
 }
 </script>
