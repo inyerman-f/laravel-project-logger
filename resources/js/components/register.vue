@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container" id="register_content">
         <h1>Register</h1>
         <div>
             <label for="name">Name</label>

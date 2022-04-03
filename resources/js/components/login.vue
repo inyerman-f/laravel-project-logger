@@ -1,23 +1,22 @@
 <template>
-        <div class="container">
-            <section>
-                <h1>Login</h1>
-                <div>
+        <div class="container" >
+            <form @submit.prevent="login()">
+                <h1>Hi Please login :)</h1>
+                <div id="user_email_input">
                     <label for="email">Email</label>
-                    <input type="email" v-model="user.email">
+                    <input id="email" type="email" v-model="user.email">
                 </div>
-                <div>
+                <div id="password_input">
                     <label for="password">Password</label>
-                    <input v-on:keyup.enter="login()"  type="password" v-model="user.password">
+                    <input id="password" v-on:keyup.enter="login()"  type="password" v-model="user.password">
                 </div>
-                <button @click="login">Login</button>
-            </section>
+                <button type="submit" class="btn btn-primary" >Login</button>
+            </form>
         </div>
 </template>
 
 <script>
 import Auth from '../Auth.js';
-
 
 export default {
     name:'Login',
@@ -29,7 +28,9 @@ export default {
             }
         };
     },
+    created() {
 
+    },
     methods: {
         login() {
             this.axios.post('/api/login', this.user)
@@ -43,17 +44,27 @@ export default {
                     console.log(error);
                     this.$router.push('/login');
                 });
-/*
-            let login_nav = document.getElementById('login_nav');
-            let register_nav = document.getElementById('register_nav');
-            let projects_nav = document.getElementById('projects_nav');
-            let dashboard_nav = document.getElementById('dashboard_nav');
-            let logout_nav = document.getElementById('logout_nav_link');
-            logout_nav.style.visibility= 'show';
-            login_nav.style.visibility = 'hidden';
-            register_nav.style.visibility = 'hidden';
-            projects_nav.style.visibility = 'show';
-            dashboard_nav.style.visibility = 'show';*/
+            this.toggleAfterLogin();
+        },
+        toggleAfterLogin(){
+            let login_nav = document
+                .getElementById('login_nav');
+            let register_nav = document
+                .getElementById('register_nav');
+            let projects_nav = document
+                .getElementById('projects_nav');
+            let dashboard_nav = document
+                .getElementById('dashboard_nav');
+            let logout_nav = document.
+            getElementById('logout_nav_link');
+            let home_content = document
+                .getElementById('home_content');
+            logout_nav.style.display= 'unset';
+            login_nav.style.display = 'none';
+            register_nav.style.display = 'none';
+            projects_nav.style.display = 'unset';
+            dashboard_nav.style.display = 'unset';
+            home_content.style.display = 'none';
         }
     }
 }

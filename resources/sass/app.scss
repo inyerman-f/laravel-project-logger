@@ -6,3 +6,40 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+.container{
+    min-height: 75vh;
+}
+footer{
+    float: bottom;
+}
+
+#projects_nav{
+    display : none;
+}
+
+#dashboard_nav{
+    display : none;
+}
+#logout_nav_link{
+    display: none;
+}
+.container{
+    padding-top: 50px;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+input, button, select, optgroup, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+}
