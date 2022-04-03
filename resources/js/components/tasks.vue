@@ -1,25 +1,44 @@
 <template>
-    <div class='row'>
-        <h1>Tasks for list id: {{$route.params.id }}</h1>
-        <h4>New Task</h4>
-        <form @submit.prevent="addNewTask()">
-            <div class="input-group">
-                <input v-model="task.task_name" type="text" name="task_name" class="form-control" autofocus>
-                <input v-model="task.task_description" type="text" name="task_description" class="form-control" autofocus>
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary">New Task</button>
-                </span>
+    <div class='container' id="tasks">
+        <section>
+            <h1>Tasks for list id: {{$route.params.id }}</h1>
+            <h4>Add a New Task</h4>
+            <form @submit.prevent="addNewTask()">
+                <div class="input-group">
+                    <label for="task_name">Task Name</label>
+                    <input v-model="task.task_name" type="text" name="task_name" class="form-control" autofocus id="task_name">
+                    <label for="task_description" >Task Description</label>
+                    <input v-model="task.task_description" type="text" name="task_description" class="form-control" autofocus id="task_description">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">New Task</button>
+                    </span>
+                </div>
+            </form>
+            <h4>All Tasks</h4>
+            <div class="list-group" v-if="tasks">
+                <div v-if='tasks.length === 0'>There are no tasks yet!</div>
             </div>
-        </form>
-        <h4>All Tasks</h4>
-        <div class="list-group" v-if="tasks">
-            <div v-if='tasks.length === 0'>There are no tasks yet!</div>
-
-            <div class="list-group-item" v-for="(item, index) in tasks">
-                <span width="45vw" >{{ item.task_name }}</span><span width="45vw">{{item.task_description}} {{item.id}}</span>
-                <button @click="deleteTask(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button>
-            </div>
-        </div>
+        </section>
+        <section>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Project Id</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Project Description</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="projects_table" v-for="(item, index) in tasks">
+                <tr>
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.task_name}}</td>
+                    <td>{{item.task_description}}</td>
+                    <td><button @click="deleteTask(item.id)" class="btn btn-danger btn-xs pull-right">Delete</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
     </div>
 </template>
 <script>

@@ -43,6 +43,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                     this.$router.push('/login');
+                    alert('please verify your credentials, or register if need.')
                 });
             this.toggleAfterLogin();
         },
@@ -59,6 +60,7 @@ export default {
             getElementById('logout_nav_link');
             let home_content = document
                 .getElementById('home_content');
+
             logout_nav.style.display= 'unset';
             login_nav.style.display = 'none';
             register_nav.style.display = 'none';

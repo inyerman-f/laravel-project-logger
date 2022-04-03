@@ -5413,6 +5413,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5436,6 +5443,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
       this.hideAfterLogout();
+      this.toggleNavbar();
     },
     hideAfterLogout: function hideAfterLogout() {
       var login_nav = document.getElementById('login_nav');
@@ -5459,6 +5467,10 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         navbar.style.display = 'none';
       }
+    },
+    followPath: function followPath(path) {
+      this.$router.push(path);
+      this.toggleNavbar();
     }
   }
 });
@@ -5621,8 +5633,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5690,6 +5700,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
 
         _this.$router.push('/login');
+
+        alert('please verify your credentials, or register if need.');
       });
       this.toggleAfterLogin();
     },
@@ -5724,6 +5736,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Auth */ "./resources/js/Auth.js");
+//
+//
 //
 //
 //
@@ -5896,6 +5910,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29294,7 +29327,11 @@ var render = function () {
                 "data-toggle": "collapse",
                 "aria-label": "Toggle navigation",
               },
-              on: { click: _vm.toggleNavbar },
+              on: {
+                click: function ($event) {
+                  return _vm.toggleNavbar()
+                },
+              },
             },
             [_c("span", { staticClass: "navbar-toggler-icon" })]
           ),
@@ -29311,21 +29348,20 @@ var render = function () {
                   "li",
                   { staticClass: "navbar-item", attrs: { id: "login_nav" } },
                   [
-                    _c(
-                      "div",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-item nav-link ml-3",
-                            attrs: { to: "/login" },
-                            on: { click: _vm.toggleNavbar },
+                    _c("div", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "nav-item nav-link ml-3",
+                          on: {
+                            click: function ($event) {
+                              return _vm.followPath("/login")
+                            },
                           },
-                          [_vm._v("Login")]
-                        ),
-                      ],
-                      1
-                    ),
+                        },
+                        [_vm._v("Login")]
+                      ),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -29333,21 +29369,20 @@ var render = function () {
                   "li",
                   { staticClass: "navbar-item", attrs: { id: "register_nav" } },
                   [
-                    _c(
-                      "div",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-item nav-link ml-3",
-                            attrs: { to: "/register" },
-                            on: { click: _vm.toggleNavbar },
+                    _c("div", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "nav-item nav-link ml-3",
+                          on: {
+                            click: function ($event) {
+                              return _vm.followPath("/register")
+                            },
                           },
-                          [_vm._v("Register")]
-                        ),
-                      ],
-                      1
-                    ),
+                        },
+                        [_vm._v("Register")]
+                      ),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -29355,20 +29390,20 @@ var render = function () {
                   "li",
                   { staticClass: "navbar-item", attrs: { id: "projects_nav" } },
                   [
-                    _c(
-                      "div",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-item nav-link ml-3",
-                            attrs: { to: "/projects" },
+                    _c("div", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "nav-item nav-link ml-3",
+                          on: {
+                            click: function ($event) {
+                              return _vm.followPath("/projects")
+                            },
                           },
-                          [_vm._v("Projects")]
-                        ),
-                      ],
-                      1
-                    ),
+                        },
+                        [_vm._v("Projects")]
+                      ),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -29379,20 +29414,20 @@ var render = function () {
                     attrs: { id: "dashboard_nav" },
                   },
                   [
-                    _c(
-                      "div",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-item nav-link ml-3",
-                            attrs: { to: "/dashboard" },
+                    _c("div", [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "nav-item nav-link ml-3",
+                          on: {
+                            click: function ($event) {
+                              return _vm.followPath("/dashboard")
+                            },
                           },
-                          [_vm._v("Dashboard")]
-                        ),
-                      ],
-                      1
-                    ),
+                        },
+                        [_vm._v("Dashboard")]
+                      ),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -29427,12 +29462,33 @@ var render = function () {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _c("footer", [_vm._v("\n        this is a footer.\n    ")]),
+      _vm._m(0),
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "w-100 py-4 flex-shrink-0" }, [
+      _c("div", { staticClass: "container py-4" }, [
+        _c("div", { staticClass: "row gy-4 gx-5" }, [
+          _c("div", { staticClass: "col-lg-4 col-md-6" }, [
+            _c("h5", { staticClass: "text-white mb-3" }, [
+              _vm._v("Fueled by passion."),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "small text-muted" }, [
+              _vm._v("Ignited by a motivation to do right."),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -29642,18 +29698,7 @@ var render = function () {
   return _c("div", { staticClass: "container", attrs: { id: "dashboard" } }, [
     _c("h1", [_vm._v("Dashboard Dashboard")]),
     _vm._v(" "),
-    _c("h4", [_vm._v("The logged in user details Here")]),
-    _c("br"),
-    _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.user.name))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(" " + _vm._s(_vm.user.id))]),
-    _vm._v(" "),
-    _c("h4", [
-      _vm._v(
-        "\n        Thank you for taking the time to review this project. For too long I've been waiting for an\n        opportunity like this. I Know I'm not the highest expert, nor do I pretend to be. I'm just a\n        simple human trying to make a living out of words. If for some reason I'm not the best fit.\n        I do hope the best for you all. May you always stay blessed, may you always stay centered\n        and may you always find something much sweeter than truth.\n    "
-      ),
-    ]),
+    _c("h2", [_vm._v("Hello " + _vm._s(_vm.user.name))]),
     _vm._v(" "),
     _c("h2", [_vm._v("\n        Manage your projects.\n    ")]),
     _vm._v(" "),
@@ -29661,19 +29706,24 @@ var render = function () {
       _c(
         "p",
         [
-          _vm._v(
-            "\n           To manage your projects please click here.\n            "
-          ),
           _c(
             "router-link",
             {
               staticClass: "nav-item nav-link ml-3",
               attrs: { to: "/projects" },
             },
-            [_vm._v("Projects")]
+            [_vm._v("To manage your projects please click here.")]
           ),
+          _vm._v(" "),
+          _c("router-view"),
         ],
         1
+      ),
+    ]),
+    _vm._v(" "),
+    _c("h4", [
+      _vm._v(
+        "\n        Thank you for taking the time to review this project. For too long I've been waiting for an\n        opportunity like this. I Know I'm not the highest expert, nor do I pretend to be. I'm just a\n        simple human trying to make a living out of words. If for some reason I'm not the best fit.\n        I do hope the best for you all. May you always stay blessed, may you always stay centered\n        and may you always find something much sweeter than truth.\n    "
       ),
     ]),
   ])
@@ -29827,6 +29877,10 @@ var render = function () {
           },
           [
             _c("div", { staticClass: "input-group" }, [
+              _c("label", { attrs: { for: "project_name" } }, [
+                _vm._v("Project Name"),
+              ]),
+              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -29837,7 +29891,12 @@ var render = function () {
                   },
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "project_name", autofocus: "" },
+                attrs: {
+                  type: "text",
+                  name: "project_name",
+                  autofocus: "",
+                  id: "project_name",
+                },
                 domProps: { value: _vm.project.project_name },
                 on: {
                   input: function ($event) {
@@ -29848,6 +29907,10 @@ var render = function () {
                   },
                 },
               }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "project_description" } }, [
+                _vm._v("Project Description"),
+              ]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -29863,6 +29926,7 @@ var render = function () {
                   type: "text",
                   name: "project_description",
                   autofocus: "",
+                  id: "project_description",
                 },
                 domProps: { value: _vm.project.project_description },
                 on: {
@@ -29882,7 +29946,7 @@ var render = function () {
               _c(
                 "button",
                 { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-                [_vm._v("New Project")]
+                [_vm._v("Create New Project")]
               ),
             ]),
           ]
@@ -30169,110 +30233,139 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("h1", [_vm._v("Tasks for list id: " + _vm._s(_vm.$route.params.id))]),
-    _vm._v(" "),
-    _c("h4", [_vm._v("New Task")]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        on: {
-          submit: function ($event) {
-            $event.preventDefault()
-            return _vm.addNewTask()
+  return _c("div", { staticClass: "container", attrs: { id: "tasks" } }, [
+    _c("section", [
+      _c("h1", [_vm._v("Tasks for list id: " + _vm._s(_vm.$route.params.id))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Add a New Task")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.addNewTask()
+            },
           },
         },
-      },
-      [
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.task.task_name,
-                expression: "task.task_name",
+        [
+          _c("div", { staticClass: "input-group" }, [
+            _c("label", { attrs: { for: "task_name" } }, [_vm._v("Task Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.task.task_name,
+                  expression: "task.task_name",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "task_name",
+                autofocus: "",
+                id: "task_name",
               },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "task_name", autofocus: "" },
-            domProps: { value: _vm.task.task_name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.task, "task_name", $event.target.value)
+              domProps: { value: _vm.task.task_name },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.task, "task_name", $event.target.value)
+                },
               },
-            },
-          }),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.task.task_description,
-                expression: "task.task_description",
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "task_description" } }, [
+              _vm._v("Task Description"),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.task.task_description,
+                  expression: "task.task_description",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "task_description",
+                autofocus: "",
+                id: "task_description",
               },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "task_description", autofocus: "" },
-            domProps: { value: _vm.task.task_description },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.task, "task_description", $event.target.value)
+              domProps: { value: _vm.task.task_description },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.task, "task_description", $event.target.value)
+                },
               },
-            },
-          }),
-          _vm._v(" "),
-          _vm._m(0),
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c("h4", [_vm._v("All Tasks")]),
-    _vm._v(" "),
-    _vm.tasks
-      ? _c(
-          "div",
-          { staticClass: "list-group" },
-          [
+            }),
+            _vm._v(" "),
+            _vm._m(0),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c("h4", [_vm._v("All Tasks")]),
+      _vm._v(" "),
+      _vm.tasks
+        ? _c("div", { staticClass: "list-group" }, [
             _vm.tasks.length === 0
               ? _c("div", [_vm._v("There are no tasks yet!")])
               : _vm._e(),
-            _vm._v(" "),
-            _vm._l(_vm.tasks, function (item, index) {
-              return _c("div", { staticClass: "list-group-item" }, [
-                _c("span", { attrs: { width: "45vw" } }, [
-                  _vm._v(_vm._s(item.task_name)),
-                ]),
-                _c("span", { attrs: { width: "45vw" } }, [
-                  _vm._v(_vm._s(item.task_description) + " " + _vm._s(item.id)),
+          ])
+        : _vm._e(),
+    ]),
+    _vm._v(" "),
+    _c("section", [
+      _c(
+        "table",
+        { staticClass: "table" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.tasks, function (item, index) {
+            return _c("tbody", { attrs: { id: "projects_table" } }, [
+              _c("tr", [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(item.id)),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger btn-xs pull-right",
-                    on: {
-                      click: function ($event) {
-                        return _vm.deleteTask(item.id)
+                _c("td", [_vm._v(_vm._s(item.task_name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(item.task_description))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs pull-right",
+                      on: {
+                        click: function ($event) {
+                          return _vm.deleteTask(item.id)
+                        },
                       },
                     },
-                  },
-                  [_vm._v("Delete")]
-                ),
-              ])
-            }),
-          ],
-          2
-        )
-      : _vm._e(),
+                    [_vm._v("Delete")]
+                  ),
+                ]),
+              ]),
+            ])
+          }),
+        ],
+        2
+      ),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -30286,6 +30379,22 @@ var staticRenderFns = [
         { staticClass: "btn btn-primary", attrs: { type: "submit" } },
         [_vm._v("New Task")]
       ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Project Id")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Project Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Project Description")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Delete")]),
+      ]),
     ])
   },
 ]

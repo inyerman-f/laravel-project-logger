@@ -5,9 +5,11 @@
             <h4>Add a Project</h4>
             <form @submit.prevent="addNewProject()">
                 <div class="input-group">
-                    <input v-model="project.project_name" type="text" name="project_name" class="form-control" autofocus>
-                    <input v-model="project.project_description" type="text" name="project_description" class="form-control" autofocus>
-                    <button type="submit" class="btn btn-primary">New Project</button>
+                    <label for="project_name">Project Name</label>
+                    <input v-model="project.project_name" type="text" name="project_name" class="form-control" autofocus id="project_name">
+                    <label for="project_description">Project Description</label>
+                    <input v-model="project.project_description" type="text" name="project_description" class="form-control" autofocus id="project_description">
+                    <button type="submit" class="btn btn-primary">Create New Project</button>
                 </div>
             </form>
         </section>
