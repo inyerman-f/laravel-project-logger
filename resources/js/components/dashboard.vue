@@ -1,16 +1,11 @@
 <template>
         <div class="container" id="dashboard">
-            <h1>Dashboard Dashboard</h1>
+            <h1>Dashboard</h1>
              <h2>Hello {{user.name}}</h2>
             <h2>
-                Manage your projects.
+                <router-link  class="nav-item nav-link ml-3" to="/projects">To manage your projects please click here.</router-link>
+                <router-view></router-view>
             </h2>
-            <div>
-                <p>
-                    <router-link  class="nav-item nav-link ml-3" to="/projects">To manage your projects please click here.</router-link>
-                    <router-view></router-view>
-                </p>
-            </div>
             <h4>
                 Thank you for taking the time to review this project. For too long I've been waiting for an
                 opportunity like this. I Know I'm not the highest expert, nor do I pretend to be. I'm just a
@@ -21,13 +16,10 @@
         </div>
 </template>
 <script>
-
-
 export default {
-
     data () {
         return {
-            user: this.auth.user
+            user: this.auth.user,
         }
     },
     created() {

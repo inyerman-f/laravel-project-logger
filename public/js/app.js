@@ -5628,11 +5628,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5693,7 +5688,6 @@ __webpack_require__.r(__webpack_exports__);
       this.axios.post('/api/login', this.user).then(function (_ref) {
         var data = _ref.data;
         _Auth_js__WEBPACK_IMPORTED_MODULE_0__["default"].login(data.access_token, data.user); //set local storage
-        //this.$router.;
 
         _this.$router.push('/dashboard');
       })["catch"](function (error) {
@@ -5702,10 +5696,24 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push('/login');
 
         alert('please verify your credentials, or register if need.');
+
+        _this.doOnFailedLogin();
       });
-      this.toggleAfterLogin();
+      this.doAfterLogin();
     },
-    toggleAfterLogin: function toggleAfterLogin() {
+    doOnFailedLogin: function doOnFailedLogin() {
+      var login_nav = document.getElementById('login_nav');
+      var register_nav = document.getElementById('register_nav');
+      var projects_nav = document.getElementById('projects_nav');
+      var dashboard_nav = document.getElementById('dashboard_nav');
+      var logout_nav = document.getElementById('logout_nav_link');
+      logout_nav.style.display = 'none';
+      login_nav.style.display = 'unset';
+      register_nav.style.display = 'unset';
+      projects_nav.style.display = 'none';
+      dashboard_nav.style.display = 'none';
+    },
+    doAfterLogin: function doAfterLogin() {
       var login_nav = document.getElementById('login_nav');
       var register_nav = document.getElementById('register_nav');
       var projects_nav = document.getElementById('projects_nav');
@@ -29696,30 +29704,23 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container", attrs: { id: "dashboard" } }, [
-    _c("h1", [_vm._v("Dashboard Dashboard")]),
+    _c("h1", [_vm._v("Dashboard")]),
     _vm._v(" "),
     _c("h2", [_vm._v("Hello " + _vm._s(_vm.user.name))]),
     _vm._v(" "),
-    _c("h2", [_vm._v("\n        Manage your projects.\n    ")]),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "p",
-        [
-          _c(
-            "router-link",
-            {
-              staticClass: "nav-item nav-link ml-3",
-              attrs: { to: "/projects" },
-            },
-            [_vm._v("To manage your projects please click here.")]
-          ),
-          _vm._v(" "),
-          _c("router-view"),
-        ],
-        1
-      ),
-    ]),
+    _c(
+      "h2",
+      [
+        _c(
+          "router-link",
+          { staticClass: "nav-item nav-link ml-3", attrs: { to: "/projects" } },
+          [_vm._v("To manage your projects please click here.")]
+        ),
+        _vm._v(" "),
+        _c("router-view"),
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("h4", [
       _vm._v(

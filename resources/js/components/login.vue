@@ -36,18 +36,38 @@ export default {
             this.axios.post('/api/login', this.user)
                 .then(({data}) => {
                     Auth.login(data.access_token,data.user); //set local storage
-                    //this.$router.;
                     this.$router.push('/dashboard');
 
                 })
                 .catch((error) => {
                     console.log(error);
                     this.$router.push('/login');
-                    alert('please verify your credentials, or register if need.')
+                    alert('please verify your credentials, or register if need.');
+                    this.doOnFailedLogin();
                 });
-            this.toggleAfterLogin();
+            this.doAfterLogin();
         },
-        toggleAfterLogin(){
+        doOnFailedLogin(){
+            let login_nav = document
+                .getElementById('login_nav');
+            let register_nav = document
+                .getElementById('register_nav');
+            let projects_nav = document
+                .getElementById('projects_nav');
+            let dashboard_nav = document
+                .getElementById('dashboard_nav');
+            let logout_nav = document.
+            getElementById('logout_nav_link');
+
+            logout_nav.style.display= 'none';
+            login_nav.style.display = 'unset';
+            register_nav.style.display = 'unset';
+            projects_nav.style.display = 'none';
+            dashboard_nav.style.display = 'none';
+
+        },
+        doAfterLogin(){
+
             let login_nav = document
                 .getElementById('login_nav');
             let register_nav = document
@@ -67,6 +87,7 @@ export default {
             projects_nav.style.display = 'unset';
             dashboard_nav.style.display = 'unset';
             home_content.style.display = 'none';
+
         }
     }
 }
