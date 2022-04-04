@@ -43,6 +43,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    alert('please make sure your registration details are correct');
                 });
         }
     }

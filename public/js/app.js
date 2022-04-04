@@ -5900,6 +5900,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push('/login');
       })["catch"](function (error) {
         console.log(error);
+        alert('please make sure our registration details are correct');
       });
     }
   }
