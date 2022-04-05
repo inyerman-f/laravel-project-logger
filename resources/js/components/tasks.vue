@@ -1,7 +1,8 @@
 <template>
     <div class='container' id="tasks">
         <section>
-            <h1>Tasks for list id: {{$route.params.id }}</h1>
+            <h1>Tasks for  {{project_name}}, with id: {{$route.params.id }}</h1>
+
             <h4>Add a New Task</h4>
             <form @submit.prevent="addNewTask()">
                 <div class="input-group">
@@ -47,6 +48,8 @@ export default {
         return {
             loading: true,
             user: this.auth.user,
+            project_name:[],
+            project_description:[],
             tasks:[],
             task: {
                 task_name:'',
@@ -65,7 +68,8 @@ export default {
         }
     },
     created() {
-        this.fetchTasks(this.$route.params.id )
+        this.fetchTasks(this.$route.params.id );
+        this.getProjectDetails(this.$route.params.id);
         // console.log(this.auth.user);
     },
     methods: {
@@ -91,6 +95,15 @@ export default {
                 })
                 .catch((err) => console.error(err));
         },
+        getProjectDetails(project_id){
+            axios.get('/api/projects/'+project_id,)
+                .then((res) => {
+                    this.project_name = res.data['project_name'];
+                    this.project_description = res.data['project_description'];
+                    this.loading = false;
+                })
+                .catch((err) => console.error(err));
+        }
     }
 }
 </script>
