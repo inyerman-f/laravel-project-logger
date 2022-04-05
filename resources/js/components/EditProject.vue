@@ -1,17 +1,17 @@
 <template>
     <div class="container">
         <h1>Edit Project {{projectName}}, with id: {{$route.params.id }}</h1>
-        <form>
+        <form @submit.prevent="updateProject($route.params.id)">
             <div>
                 <label for="project_name_edit" >Project Name</label>
-                <input name="project_name" type="text" v-model="projecto.project_name" id="project_name_edit" ref="projectNameInputRef">
+                <input name="project_name" :placeholder="projectName" type="text" v-model="projecto.project_name" id="project_name_edit" ref="projectNameInputRef"/>
             </div>
             <div>
                 <label for="project_description_edit" >Project Description</label>
-                <input type="text" v-model="projecto.project_description" id="project_description_edit" ref="projectDescriptionInputRef">
+                <input type="text" :placeholder="projectDescription" v-model="projecto.project_description" id="project_description_edit" ref="projectDescriptionInputRef"/>
             </div>
             <div>
-                <button @click="updateProject($route.params.id)" class="btn btn-primary" >Update Project</button>
+                <button type="submit" class="btn btn-primary" >Update Project</button>
             </div>
         </form>
     </div>
@@ -27,7 +27,7 @@ export default {
                 project_description: '',
             },
             input: {
-                project_name: "derp", // or pre-fill with other default value like `lorem`
+                project_name: "", // or pre-fill with other default value like `lorem`
 
             },
         }
@@ -37,14 +37,20 @@ export default {
     },
     methods: {
         updateProject(project_id) {
+            if(!this.projecto.project_name){
+                this.projecto.project_name = this.projectName;
+            }
+            if(!this.projecto.project_description){
+                this.projecto.project_description = this.projectDescription;
+            }
             console.log(this.user);
             this.axios.post('/api/projects/'+project_id+'/edit', this.projecto)
                 .then(({data}) => {
-                    this.$router.push('/projects');
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+            this.$router.push('/projects');
         },
         getProjectDetails(project_id){
             axios.get('/api/projects/'+project_id,)
