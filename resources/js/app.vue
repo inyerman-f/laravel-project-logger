@@ -36,6 +36,7 @@
             </div>
         </nav>
         <router-view> </router-view>
+
         <footer class="w-100 py-4 flex-shrink-0">
             <div class="container py-4">
                 <div class="row gy-4 gx-5">
@@ -46,6 +47,7 @@
                 </div>
             </div>
         </footer>
+
     </section>
 </template>
 
@@ -101,11 +103,12 @@ export default {
             let navbar = document
                 .getElementById('navbarNavDropdown');
 
-            if(navbar.style.display == 'none'){
+            if(navbar.style.display !== 'unset'){
                 navbar.style.display = 'unset';
             }else {
                 navbar.style.display = 'none';
             }
+
         },
         followPath(path){
             this.$router.push(path);
