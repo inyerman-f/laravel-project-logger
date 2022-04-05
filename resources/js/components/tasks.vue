@@ -23,9 +23,9 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Project Id</th>
-                    <th scope="col">Project Name</th>
-                    <th scope="col">Project Description</th>
+                    <th scope="col">Task Id</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Task Description</th>
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
